@@ -1,0 +1,2 @@
+# MCP server deps (Python >= 3.10). Installed in the container; NOT in the local 3.9 .venv.
+mcp>=1.2

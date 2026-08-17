@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>My Event Targets · ICP Scout</title>
+<style>
+  :root{--bg:#0e0f13;--panel:#171923;--line:#262a37;--text:#e7e9ee;--muted:#9aa0ad;
+    --accent:#6d8bff;--good:#37d399;--warn:#f5a623}
+  @media (prefers-color-scheme:light){:root{--bg:#f6f7fb;--panel:#fff;--line:#e4e7ee;
+    --text:#1a1c22;--muted:#66707f;--accent:#3a5bff}}
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.5 -apple-system,system-ui,sans-serif;background:var(--bg);
+    color:var(--text);padding:16px;max-width:820px;margin:0 auto;-webkit-text-size-adjust:100%}
+  h1{font-size:20px;margin:4px 0 12px;display:flex;align-items:center;gap:8px}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;position:sticky;top:0;
+    background:var(--bg);padding:8px 0;z-index:5}
+  input[type=search]{flex:1;min-width:160px}
+  input,button,select{background:var(--panel);color:var(--text);border:1px solid var(--line);
+    border-radius:9px;padding:9px 11px;font-size:14px;font-family:inherit}
+  .toggle{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;
+    background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:0 11px}
+  .event{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    margin-bottom:12px;overflow:hidden}
+  .event > summary{cursor:pointer;list-style:none;padding:14px 16px}
+  .event > summary::-webkit-details-marker{display:none}
+  .ev-title{font-weight:700;font-size:16px}
+  .ev-title a{color:inherit;text-decoration:none}
+  .ev-meta{color:var(--muted);font-size:13px;margin-top:2px}
+  .ev-counts{margin-top:6px;font-size:12px;color:var(--muted)}
+  .pill{display:inline-block;background:rgba(109,139,255,.14);color:var(--accent);
+    border-radius:999px;padding:1px 8px;margin-right:6px}
+  .pill.good{background:rgba(55,211,153,.15);color:var(--good)}
+  .people{padding:0 10px 10px}
+  .person{display:flex;align-items:flex-start;gap:10px;padding:10px;border-top:1px solid var(--line)}
+  .person .avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;background:var(--line);flex:0 0 auto}
+  .person .body{flex:1;min-width:0}
+  .person .name{font-weight:600}
+  .person .why{color:var(--muted);font-size:13px;margin-top:2px}
+  .person.connected{opacity:.55}
+  .person a.li{color:var(--accent);text-decoration:none;font-size:13px;white-space:nowrap}
+  .chk{width:22px;height:22px;flex:0 0 auto;margin-top:2px}
+  .empty{color:var(--muted);text-align:center;padding:40px 0}
+  .mode{font-size:11px;color:var(--muted);text-align:center;margin-top:16px}
+</style>
+</head>
+<body>
+  <h1>🎯 My Event Targets</h1>
+  <div class="controls">
+    <input type="search" id="q" placeholder="Search people or events…" />
+    <label class="toggle"><input type="checkbox" id="onlyOpen" /> Unconnected only</label>
+    <label class="toggle"><input type="checkbox" id="onlyTargets" checked /> Targets only</label>
+  </div>
+  <div id="root"></div>
+  <div class="mode" id="mode"></div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

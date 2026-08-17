@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Event Target Sheet</title>
+<style>
+  body{font:13px/1.5 -apple-system,system-ui,sans-serif;color:#111;background:#fff;max-width:800px;margin:0 auto;padding:24px}
+  h1{font-size:22px;margin:0 0 2px}
+  .meta{color:#666;margin-bottom:16px}
+  .count{color:#111;font-weight:600;margin-bottom:14px}
+  .person{display:flex;gap:12px;padding:12px 0;border-top:1px solid #e5e5e5;page-break-inside:avoid}
+  .avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;background:#eee;flex:0 0 auto}
+  .name{font-weight:700;font-size:15px}
+  .why{color:#555;font-size:12px;margin:2px 0}
+  .talk{background:#f4f6ff;border-left:3px solid #3a5bff;padding:6px 10px;border-radius:0 6px 6px 0;font-size:12px;margin-top:5px}
+  .talk b{color:#3a5bff}
+  a{color:#2a4bdd;text-decoration:none;font-size:12px}
+  .toolbar{margin-bottom:16px}
+  button{font:inherit;padding:8px 14px;border:1px solid #ccc;border-radius:8px;background:#fff;cursor:pointer}
+  @media print{.toolbar{display:none}body{padding:0}}
+</style>
+</head>
+<body>
+  <div class="toolbar"><button id="printBtn">Save as PDF / Print</button></div>
+  <div id="root">Loading…</div>
+  <script src="pdf.js"></script>
+</body>
+</html>

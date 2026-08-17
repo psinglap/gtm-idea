@@ -1,0 +1,15 @@
+{
+  "_comment": "Golden set for the offline eval harness (scripts/eval.py). Each subject is a fixed URL + gate thresholds. Precision/rejected-leak ground truth comes from your lead_feedback (approve/reject) in the DB, NOT from this file. Tighten thresholds as the corpus + your feedback grow.",
+  "subjects": [
+    {
+      "url": "https://example.com",
+      "limit": 60,
+      "min_accounts": 25,
+      "min_grounding": 0.9,
+      "max_freshness_violations": 0,
+      "max_dedup_leaks": 0,
+      "k": 20,
+      "min_precision": null
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+.venv/
+**/.venv/
+node_modules/
+# NOT apps/web — the Dockerfile builds it in a first stage and serves it from the API, so
+# there is one URL and no CORS. Excluding it silently produced an API with no UI.
+apps/web/node_modules/
+apps/web/dist/
+**/__pycache__/
+*.db
+*.db-*
+.env
+.git/
+.pytest_cache/
+tests/
+# NOT scripts/ — the scheduled outreach pass runs `python scripts/outreach_cron.py` from this
+# same image. Excluding it made `COPY scripts ./scripts` fail the build with an opaque
+# "failed to calculate checksum of ref", which reads as a Docker or platform fault rather than
+# a one-line ignore rule.
+mcp/

@@ -1,0 +1,28 @@
+# Production-target infra (Postgres + pgvector, Neo4j). NOT required for the M1 slice
+# (which runs on zero-infra SQLite). Bring this up when you want to switch WG_STORE to
+# the polyglot backend. Requires Docker (not yet installed on this machine).
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: warmgraph
+      POSTGRES_PASSWORD: warmgraph
+      POSTGRES_DB: warmgraph
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  neo4j:
+    image: neo4j:5
+    environment:
+      NEO4J_AUTH: neo4j/warmgraph
+    ports:
+      - "7474:7474" # browser
+      - "7687:7687" # bolt
+    volumes:
+      - neo4jdata:/data
+
+volumes:
+  pgdata:
+  neo4jdata:

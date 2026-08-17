@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# Node
+node_modules/
+apps/web/dist/
+
+# Local data / secrets
+*.db
+*.sqlite3
+.env
+.env.local
+data/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# The Chrome extension is tracked HERE. It was excluded on the theory that it lived in its own
+# repo, but nothing was ever pushed there, so a day of fixes — the registration bug, the tab
+# storm, the activity log — existed only on one laptop with no history. Worse, the test that
+# guards the registration fix skips itself when this folder is missing, so a fresh clone passed
+# by not running it. The two halves are edited together and are useless apart; keep them together.
+luma-icp-scout/**/__pycache__/
+luma-icp-scout/**/.DS_Store
+luma-icp-scout-*.zip
+
+# SQLite side-files
+*.db-shm
+*.db-wal
+
+# Your own identifiers, enforced by tests/test_no_private_data.py, never committed.
+tests/private-denylist.txt
+warmgraph.db
+warmgraph.db-wal
+warmgraph.db-shm
+
+# Your own ICP. Copy config/icp.example.json to config/icp.json and edit it.
+config/icp.json

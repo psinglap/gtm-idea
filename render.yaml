@@ -1,0 +1,75 @@
+# Render Blueprint — one-click deploy of the CI API (free tier).
+# After connecting the repo in Render, set the `sync: false` secrets in the dashboard.
+services:
+  - type: web
+    name: warmgraph-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free          # sleeps after 15 min idle; every client retries through the
+                        # 30-60s wake instead of erroring — see COLD_START notes
+    healthCheckPath: /health
+    # A sleeping instance is fine; an ERROR from a sleeping instance is not. Every caller —
+    # the extension, the web UI, the Playwright runner — retries with backoff over a window
+    # longer than a cold start, so a wake-up shows as a pause rather than a failure.
+    envVars:
+      - key: WG_STORE
+        value: postgres
+      - key: WG_LLM_PROVIDER
+        value: cerebras
+      - key: DATABASE_URL      # Neon pooled connection string
+        sync: false
+      - key: CEREBRAS_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: FIRECRAWL_API_KEY
+        sync: false
+      # --- event outreach ---
+      - key: WG_SECRET_KEY          # Fernet key encrypting Gmail/Apollo credentials
+        sync: false
+      - key: WG_GOOGLE_CLIENT_ID
+        sync: false
+      - key: WG_GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: WG_GOOGLE_REDIRECT_URI
+        value: https://warmgraph-api.onrender.com/oauth/google/callback
+      - key: WG_OUTREACH_MODE
+        value: draft                # flip to "send" only after reading a real batch
+      - key: WG_OUTREACH_DAILY_CAP
+        value: "200"
+      - key: WG_OUTREACH_HOURLY_CAP
+        value: "30"
+
+  # Hourly server pass over whatever the browser worker has produced: release dead leases,
+  # judge profiled attendees, enrich targets, deliver. Hourly rather than daily because the
+  # send cap is per-hour — mail that trickles out reads like a person, a batch reads like a bot.
+  # It only touches rows that are ready, so it is a no-op when the queue is empty.
+  - type: cron
+    name: warmgraph-outreach
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter       # Render has NO free plan for cron services — `free` here fails
+                        # blueprint validation outright: "free not a valid plan for
+                        # service type cron". Billed for run time only, and this job
+                        # runs for seconds an hour.
+    schedule: "17 * * * *"
+    dockerCommand: python scripts/outreach_cron.py
+    envVars:
+      - key: WG_STORE
+        value: postgres
+      - key: DATABASE_URL
+        sync: false
+      - key: CEREBRAS_API_KEY
+        sync: false
+      - key: WG_SECRET_KEY
+        sync: false
+      - key: WG_GOOGLE_CLIENT_ID
+        sync: false
+      - key: WG_GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: WG_OUTREACH_MODE
+        value: draft
+      - key: WG_OUTREACH_DAILY_CAP
+        value: "200"
+      - key: WG_OUTREACH_HOURLY_CAP
+        value: "30"

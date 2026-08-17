@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">🎯 ICP Scout</div>
+    <div class="engine-pill" id="enginePill" title="Active judging engine">…</div>
+  </header>
+
+  <!-- Step 1 · ICP (collapses once set) -->
+  <details class="card" id="icpCard" open>
+    <summary><span class="step-n">1</span> Your ICP <span class="sub">who to target</span></summary>
+    <div class="card-body">
+      <textarea id="icpDescription" rows="3" placeholder="Describe your ideal customer — or leave blank and build it from your website below."></textarea>
+      <div class="row tight">
+        <input type="url" id="icpWebsite" placeholder="yoursite.com" />
+        <button id="analyzeSiteBtn" class="ghost">Build from site</button>
+      </div>
+      <div class="hint" id="siteHint"></div>
+    </div>
+  </details>
+
+  <!-- Step 2 · Run -->
+  <div class="card">
+    <div class="card-head"><span class="step-n">2</span> Find targets</div>
+    <input type="url" id="eventUrl" placeholder="Paste Luma event link — or use the open tab" />
+    <button id="runBtn" class="primary big">🔍 Find my targets</button>
+    <button id="stopBtn" class="ghost big" hidden>■ Stop</button>
+    <div class="hint">Scans everyone → matches your ICP → reads LinkedIn (slow, resumable).</div>
+  </div>
+
+  <!-- past events -->
+  <div class="card" id="historyCard" hidden style="padding:10px 12px">
+    <label class="chkline" style="gap:8px">📁 Past events
+      <select id="historySelect" style="flex:1"></select>
+    </label>
+  </div>
+
+  <!-- progress -->
+  <div id="steps" class="steps"></div>
+
+  <!-- Step 3 · Results -->
+  <div class="resultbar" id="resultbar" hidden>
+    <div class="seg">
+      <button class="seg-btn active" data-f="targets">✅ Targets</button>
+      <button class="seg-btn" data-f="rejected">🚫 Rejected</button>
+      <button class="seg-btn" data-f="all">All</button>
+    </div>
+    <div id="summaryLine" class="summary-line"></div>
+  </div>
+  <input type="hidden" id="viewFilter" value="targets" />
+  <div id="results" class="results"></div>
+
+  <div class="footerbar" id="footerbar" hidden>
+    <button id="dashBtn" class="ghost small">📋 Board</button>
+    <button id="linkBtn" class="ghost small">🔗 Live link</button>
+    <button id="pdfBtn" class="ghost small">📄 PDF</button>
+    <button id="csvBtn" class="ghost small">CSV</button>
+    <button id="copyBtn" class="ghost small">Copy</button>
+  </div>
+
+  <!-- Settings -->
+  <details class="card" id="settingsPanel">
+    <summary>⚙️ Settings</summary>
+    <div class="card-body">
+      <label>Judging engine
+        <select id="engineSelect">
+          <option value="auto">Auto (best free available)</option>
+          <option value="local">Free local model (on-device)</option>
+          <option value="claude">Claude (needs key)</option>
+          <option value="heuristic">Keyword only</option>
+        </select>
+      </label>
+      <label>Claude API key <span class="sub">optional, stored locally — best accuracy</span>
+        <input type="password" id="apiKey" placeholder="sk-ant-… (blank = free modes)" />
+      </label>
+      <div class="hint" id="engineHint"></div>
+
+      <div class="settings-group">
+        <div class="group-title">LinkedIn reading</div>
+        <div class="row">
+          <label class="mini">Per run (0 = all)<input type="number" id="liMax" min="0" max="500" /></label>
+          <label class="mini">Delay (sec)<input type="number" id="liDelay" min="8" max="90" /></label>
+        </div>
+        <label class="chkline"><input type="checkbox" id="autoLinkedin" /> Auto-read during a run</label>
+        <div class="hint">Cached &amp; resumable — covers everyone over runs. Slower = safer.</div>
+        <button id="clearCacheBtn" class="ghost small">Clear LinkedIn read cache</button>
+      </div>
+
+      <div class="settings-group">
+        <div class="group-title">Automatic runs <span class="sub">syncs Luma, registers, pulls guest lists</span></div>
+        <label>Server URL <span class="sub">your deployed backend</span>
+          <input type="url" id="workerServerUrl" placeholder="https://your-app.up.railway.app" /></label>
+        <button id="workerPairBtn" class="ghost small">Connect this browser</button>
+        <button id="workerRunBtn" class="ghost small">Run now</button>
+        <div id="workerPairStatus" class="hint">Not connected. Until this is set, nothing runs on its own.</div>
+        <div class="hint">Runs every 5 minutes while Chrome is open, using the Luma and LinkedIn
+          sessions you are already signed into. Nothing is stored but a workspace token.</div>
+      </div>
+
+      <div class="settings-group">
+        <div class="group-title">Live dashboard <span class="sub">view your list anytime, any device</span></div>
+        <label>Sync URL <span class="sub">your deployed backend</span><input type="url" id="syncUrl" placeholder="https://your-app.onrender.com" /></label>
+        <label>Your private token <span class="sub">auto-generated</span><input type="password" id="syncToken" /></label>
+        <div class="hint">Once a Sync URL is set, every run syncs to your private board. Use the 🔗 Live link button to open it anywhere.</div>
+      </div>
+
+      <details class="card">
+        <summary>Advanced ICP keywords</summary>
+        <div class="card-body">
+          <label>Founder<textarea data-group="founder" rows="2"></textarea></label>
+          <label>Growth<textarea data-group="growth" rows="2"></textarea></label>
+          <label>Marketing<textarea data-group="marketing" rows="2"></textarea></label>
+          <label>Creator-marketing<textarea data-group="creatorIntent" rows="2"></textarea></label>
+          <label>Negatives<textarea data-group="negatives" rows="2"></textarea></label>
+          <div class="row">
+            <label class="mini">Min company age (mo)<input type="number" id="minMonths" min="0" /></label>
+            <label class="mini">Threshold<input type="number" id="threshold" min="0" /></label>
+          </div>
+          <button id="resetIcpBtn" class="ghost small">Reset default</button>
+        </div>
+      </details>
+    </div>
+  </details>
+
+  <script src="lib/icp.js"></script>
+  <script src="lib/judge.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

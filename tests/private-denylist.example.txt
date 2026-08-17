@@ -1,0 +1,23 @@
+# Copy this file to `private-denylist.txt` (gitignored) and put your own identifiers in it,
+# one per line, lowercase. test_no_private_data.py fails if any of them appear in a tracked file.
+#
+# The point is that this list never gets committed. A denylist in a public repo publishes the
+# very strings it is meant to keep out.
+#
+# Put in it: your name, your company, your domains, your handles, your calendar link, your
+# machine's home directory, any private repo name — and the domain of anyone whose address has
+# ever ended up in a debugging comment.
+#
+# One thing NOT to add: your own GitHub username or org, if it appears in this repo's clone URL.
+# That is public by definition — the repo lives at that address — and banning it just fails the
+# build on your own README. Ban the things that are private: your email, your calendar link, your
+# customers' domains, your machine's paths.
+#
+# Examples of the SHAPE (replace all of these):
+your-name
+yourcompany
+yourcompany.com
+your-linkedin-handle
+calendar-link-id
+/users/yourname
+your-org/your-private-repo

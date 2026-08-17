@@ -1,0 +1,11 @@
+# API + workers stack (Python 3.9+). The MCP server has its own (needs 3.10+); see mcp/requirements.txt
+-e packages/warmgraph
+fastapi>=0.110
+uvicorn[standard]>=0.29
+httpx>=0.27
+pydantic>=2.5
+anthropic>=0.40
+psycopg[binary,pool]>=3.1
+slowapi>=0.1.9
+cryptography>=42.0          # Fernet encryption for stored OAuth tokens / API keys
+pytest>=8.0

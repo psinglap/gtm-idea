@@ -1,0 +1,33 @@
+{
+  "_comment": [
+    "Who counts as a target. Copy this file to config/icp.json and edit it, or point",
+    "WG_ICP_FILE at it somewhere else. This is the FIRST thing to change: until you do, the",
+    "judge applies the example ICP below, which is one company's and almost certainly not",
+    "yours. /outreach/settings reports which file is in force.",
+    "",
+    "target_roles     - a person qualifies if their CURRENT role matches one of these.",
+    "not_target_roles - weighed against the above; use for 'senior but wrong function'.",
+    "never_targets    - absolute. No other signal makes them a target.",
+    "",
+    "A malformed file is an error, not a silent fallback to this example."
+  ],
+  "target_roles": [
+    "Founder / co-founder / CEO \u2014 any industry, consumer or B2B, any stage",
+    "TECHNICAL founder \u2014 CTO or engineer who co-founded the company. A priority, not an exclusion: they can build the product but not the distribution",
+    "Growth / marketing / brand / content / social / creator-partnerships, any seniority",
+    "GTM roles \u2014 sales, business development, revenue, partnerships",
+    "Investor / VC / venture partner / angel",
+    "Founding GTM / growth / marketing hire at a startup, including 'Founding Member' where the role is commercial rather than engineering"
+  ],
+  "not_target_roles": [
+    "Individual contributor at an established company with no founder, GTM, growth or early-startup signal \u2014 e.g. a staff engineer, data scientist or designer at a large firm",
+    "Student, intern, recruiter, academic researcher, press",
+    "'Founding Engineer', 'first engineer' or any founding technical IC who is not a co-founder \u2014 they build the product, they do not own distribution. This does NOT apply to a technical co-founder or CTO, who remain among the strongest targets",
+    "Anyone at a university \u2014 student, PhD, postdoc, researcher, faculty, or an .edu address"
+  ],
+  "never_targets": [
+    "ANYONE AT A UNIVERSITY. Student, PhD, postdoc, researcher, professor, staff, or an .edu or .ac address. Not a buyer. Free AI events are full of them and they look like everyone else on the list.",
+    "FOUNDING ENGINEER, first engineer, or any founding technical IC who is not a co-founder. They build the product; they do not decide how it goes to market. A technical CO-FOUNDER or CTO is a different person and remains a strong target.",
+    "Recruiters, press, and interns."
+  ]
+}

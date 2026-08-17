@@ -1,0 +1,16 @@
+{
+  "name": "luma-runner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Runs the daily Luma sync + registration loop in a real Chrome, unattended.",
+  "scripts": {
+    "login": "node run.js login",
+    "sync": "node run.js sync",
+    "register": "node run.js register",
+    "daily": "node run.js daily",
+    "chrome": "open -na \"Google Chrome\" --args --remote-debugging-port=9222 --restore-last-session"
+  },
+  "dependencies": {
+    "playwright": "^1.62.1"
+  }
+}
