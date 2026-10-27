@@ -153,7 +153,7 @@ UI button, or `python scripts/outreach_cron.py --force`.
 
 The server half cannot reach Luma or LinkedIn. The extension does that, from your browser.
 
-1. `chrome://extensions` → Developer mode → **Load unpacked** → select `luma-icp-scout/`
+1. Install [Luma ICP Scout from the Chrome Web Store](https://chromewebstore.google.com/detail/luma-icp-scout/aljgcgddgicfdpbnihliepkcmhpgcbbj), or for your own build: `chrome://extensions` → Developer mode → **Load unpacked** → select `luma-icp-scout/`
 2. Open the side panel, enter your API URL and your company URL, and press **Connect**
 3. Make sure you are signed in to Luma and LinkedIn in that same browser
 

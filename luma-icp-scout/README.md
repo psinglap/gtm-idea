@@ -28,7 +28,11 @@ the scoring is generic and the keywords are yours to change.
 ⚠️ Reading 100+ LinkedIn profiles in one session is where account-risk is highest. Do large
 events in **batches across sessions**, and raise the delay for safety.
 
-## Install (unpacked, ~30 seconds)
+## Install
+
+**From the Chrome Web Store (recommended):** [Luma ICP Scout](https://chromewebstore.google.com/detail/luma-icp-scout/aljgcgddgicfdpbnihliepkcmhpgcbbj) → **Add to Chrome**, then pin it, open a Luma event and click the icon.
+
+### Or load it unpacked (to run your own build, ~30 seconds)
 
 1. Open `chrome://extensions`
 2. Toggle **Developer mode** (top-right) ON

@@ -145,7 +145,7 @@ Both start blank on purpose, and the app **refuses to send** until the email is 
 
 The server can't reach Luma or LinkedIn. This is the half that can.
 
-1. `chrome://extensions` → **Developer mode** → **Load unpacked** → select `luma-icp-scout/`
+1. Install **[Luma ICP Scout from the Chrome Web Store](https://chromewebstore.google.com/detail/luma-icp-scout/aljgcgddgicfdpbnihliepkcmhpgcbbj)**, or, to run your own build, `chrome://extensions` → **Developer mode** → **Load unpacked** → select `luma-icp-scout/`
 2. Open the side panel → enter your API URL and your company URL → **Connect**
 3. Be signed in to Luma and LinkedIn in that same browser
 
@@ -216,7 +216,7 @@ to finish it yourself.
 
 ## Rough edges — worth knowing before you invest a weekend
 
-- **The Chrome extension isn't on the Web Store.** Load it unpacked.
+- **The Chrome extension is on the [Chrome Web Store](https://chromewebstore.google.com/detail/luma-icp-scout/aljgcgddgicfdpbnihliepkcmhpgcbbj).** Load it unpacked instead if you change the code.
 - **The browser half only runs while your laptop is awake**, with Chrome open and both sites
   signed in. No way around it — those sites need a real session.
 - **Apollo is the real cost and the real bottleneck.** See step 9.
